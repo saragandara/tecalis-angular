@@ -1,0 +1,38 @@
+.section-games {
+  .modal.show .modal-dialog {
+    transform: translate(0, 5%);
+
+    @include media-breakpoint-up(sm) {
+      max-width: 60%;
+    }
+  }
+
+  .modal-content .modal-body {
+
+    .carousel img {
+      padding: 0;
+      margin-top: 1rem;
+    }
+
+    .carousel a {
+      cursor: pointer;
+    }
+
+    & + .modal-footer {
+      justify-content: end;
+    }
+  } 
+
+  .progress-container {
+    .progress-badge {
+      font-size: 1em;
+      text-transform: capitalize;
+      color: $black;
+    }
+
+    .progress {
+      margin-left: 1rem;
+      max-width: 95%;
+    }
+  } 
+}

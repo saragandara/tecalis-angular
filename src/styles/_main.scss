@@ -1,0 +1,36 @@
+.footer {
+  flex-shrink: 0;
+  height: 140px;
+  border-top: 2px solid #fd5d93;
+  color: #FFF;
+
+  .row {
+    align-items: center;
+  }
+
+  .logo {
+    margin: 1rem 0;
+    text-align: center;
+
+    @include media-breakpoint-up(sm) {
+      margin: 0;
+      text-align: right;
+    }
+  }
+}
+
+h1, h2 {
+  margin-bottom: 1.5rem;
+}
+
+h3, h4, h5 {
+  margin-bottom: 1rem;
+}
+
+.text-strong {
+  font-weight: 700;
+}
+
+.highlighted {
+  color: $primary;
+}

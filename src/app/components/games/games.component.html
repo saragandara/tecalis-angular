@@ -1,0 +1,91 @@
+<div class="games-container">
+  <h2>Game List</h2>
+  <table class="table" *ngIf="gamesList">
+    <thead>
+      <tr>
+        <th class="text-center">#</th>
+        <th>Name</th>
+        <th>Release Date</th>
+        <th>ESRB Rating</th>
+        <th class="text-right"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let game of gamesToShow; index as i;">
+        <td class="text-center">{{ page === 1 ? i+1 : ((page-1) * 10)+i+1}}</td>
+        <td>{{game.name}}</td>
+        <td>{{game.released | date:'d/M/yyyy'}}</td>
+        <td>{{game.esrb_rating.name}}</td>
+        <td>
+          <button type="button" rel="tooltip" class="btn btn-info btn-sm btn-icon" title="Show details"
+            (click)="showGameDetails(game.id); gameModal.show()">
+            <i class="fa fa-search"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination *ngIf="gamesToShow && gamesToShow.length > 0"
+    class="pagination-info justify-content-center"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+    [boundaryLinks]="true"
+    [totalItems]="gamesList.length"
+    [(ngModel)]="page"
+    (ngModelChange)="changePage($event)"
+  >
+  </pagination>
+</div>
+
+<div bsModal #gameModal="bs-modal" 
+  aria-hidden="true" aria-labelledby="gameModalLabel" class="modal fade"
+  id="gameModal" role="dialog" tabindex="-1"
+>
+  <div class="modal-dialog" *ngIf="game">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <button aria-hidden="true" class="close" type="button" data-dismiss="modal"
+          (click)="gameModal.hide()"
+        >
+          <i class="tim-icons icon-simple-remove"> </i>
+        </button>
+        <h4 class="title title-up">{{game.name}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="description" [innerHTML]="[game.description | slice:0:350, game.description.length > 350 ? ' ...' : '' ]"></div>
+        <p><span class="text-strong">Release date:</span> {{game.released | date:'d/M/yyyy'}}</p>
+        <div class="progress-container progress-primary">
+          <span class="progress-badge">
+            <span class="text-strong">Rating:</span> {{game.rating}} / {{game.rating_top}}
+          </span>
+          <progressbar class="progress-bar-primary" [value]="game.rating_percentaje">
+            <span class="progress-value"> {{game.rating}} of {{game.rating_top}} </span>
+          </progressbar>
+        </div>
+        <div class="platforms-container">
+          <p class="text-strong">Platforms:</p>
+          <span class="badge badge-default mr-1" *ngFor="let platform of game.platforms"> {{platform.platform.name}} </span>
+        </div>
+        <carousel [showIndicators]="true" *ngIf="game.background_image && game.background_image_additional; else singleImage">
+          <slide *ngIf="game.background_image">
+            <img alt="First slide" class="d-block w-100" [src]="game.background_image" />
+          </slide>
+          <slide *ngIf="game.background_image_additional">
+            <img alt="Second slide" class="d-block w-100" [src]="game.background_image_additional" />
+          </slide>
+        </carousel>
+        <ng-template #singleImage>
+          <img *ngIf="game.background_image || game.background_image_additional" class="d-block w-100" alt=""
+            [src]="game.background_image_additional ? game.background_image : game.background_image_additional" />
+        </ng-template>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" data-dismiss="modal" type="button" (click)="gameModal.hide()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

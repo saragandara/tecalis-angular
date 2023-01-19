@@ -1,0 +1,42 @@
+<div class="section section-stores" *ngIf="!storeId">
+  <h1 class="page-title">Stores List</h1>
+  <div *ngIf="storeList && storeList.length > 0; else message" class="stores-list row">
+    <ng-container *ngFor="let store of storeList">
+      <div  class="store card card-coin card-plain col-sm-4 col-md-3" (click)="showStoreDetails(store.id)">
+        <div class="card-header">
+          <img loading="lazy" class="img-center img-fluid rounded-circle" alt=""
+            [src]="store.image_background" 
+            (error)="setDefaultImage($event)">
+          <h4 class="title">{{store.name}}</h4>
+        </div>
+        <div class="card-body">
+          <a class="link" [href]="'https://'+store.domain" target="_blank" (click)="domainClick()">{{store.domain}}</a>
+          <p class="text">
+            <i class="fa fa-gamepad mr-2"></i> <span class="text-strong">{{store.games_count}}</span>
+          </p>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <ng-template #message>
+    <p class="message-stores">There are no results to show.</p>
+  </ng-template>
+</div>
+
+<ng-container *ngIf="store && storeId > 0">
+  <div class="section-navigation">
+    <button type="button" class="btn btn-info btn-round" (click)="showStoreList()">
+      <i class="fa fa-chevron-left mr-2"></i> Back to Store List
+    </button>
+  </div>
+  <div class="section section-detail">
+    <h1 class="page-title">{{store.name}}</h1>
+    <div [innerHTML]="store.description"></div>
+  </div>
+  <div class="section-games">
+    <app-games
+      [storeId]="storeId"
+      (goBackToStoreList)="showStoreList()"
+    ></app-games>
+  </div>
+</ng-container>

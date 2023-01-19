@@ -1,0 +1,72 @@
+.section-stores {
+  .page-title {
+    @include media-breakpoint-up(sm) {
+      margin-bottom: 4rem;
+    }
+  }
+
+  .stores-list {
+    justify-content: center;
+    
+    @include media-breakpoint-up(sm) {
+      gap: 2rem; 
+    }
+  }
+
+  .card.card-coin {
+    margin: 4rem 2rem 0 2rem;
+
+    @include media-breakpoint-up(sm) {
+      margin: 2rem 0 0 0;
+    }
+
+    &:hover {
+      border: 2px solid $primary;
+      cursor: pointer;
+    }
+
+    .card-header {
+      margin-bottom: 0;
+      padding: 0;
+
+      @include media-breakpoint-up(sm) {
+        padding: inherit;
+      }
+
+      .title {
+        text-align: center;
+      }
+    }
+  }
+
+  .img-center {
+    object-fit: cover;
+    max-width: 84px;
+    height: 84px;
+    margin-top: 58px;
+
+    @include media-breakpoint-up(sm) {
+      margin-top: 59px;
+    }
+  }
+
+  .link {
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+}
+
+.section-navigation {
+  margin-top: 3rem;
+}
+
+.section-detail {
+  
+  &.section {
+    padding: 3rem 0;
+  }
+
+  .page-title {
+    margin-bottom: 2rem;
+  }
+}
