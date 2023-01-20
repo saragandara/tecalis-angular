@@ -1,0 +1,14 @@
+<div class="section-navigation">
+  <button type="button" class="btn btn-info btn-round" (click)="showStoreList()">
+    <i class="fa fa-chevron-left mr-2"></i> Back to Store List
+  </button>
+  </div>
+  <div class="section section-detail">
+  <h1 class="page-title">{{store.name}}</h1>
+  <div [innerHTML]="store.description"></div>
+  </div>
+  <div class="section-games">
+  <app-games
+    [storeId]="storeId"
+  ></app-games>
+</div>

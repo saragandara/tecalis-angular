@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from 'src/app/models/store.model';
 import { StoresService } from '../../services/stores.service';
 
@@ -11,23 +12,15 @@ export class HomeComponent implements OnInit {
 
   public defaultImage = 'assets/img/default.png';
   public storeList: Store[] = [];
-  public store!: Store;
-  public storeId = 0;
   public isDomainClicked = false;
 
   constructor(
+    private router: Router,
     private storesService: StoresService
   ) { }
 
   ngOnInit(): void {    
     this.getStoresList();
-  }
-
-  getStoreDetail() {
-    this.storesService.getStoreDetail(this.storeId)
-      .subscribe(resp => {
-        this.store = resp;
-      })
   }
 
   getStoresList() {
@@ -45,13 +38,8 @@ export class HomeComponent implements OnInit {
     if (this.isDomainClicked) {
       this.isDomainClicked = false;
     } else {
-      this.storeId = id;
-      this.getStoreDetail();
+      this.router.navigate([`store/${id}`]);
     }
-  }
-
-  showStoreList() {
-    this.storeId = 0;
   }
 
   domainClick() {

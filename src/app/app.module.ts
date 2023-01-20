@@ -16,6 +16,7 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { GamesComponent } from './components/games/games.component';
 import { SpinnerComponent } from './components/shared/spinner/spinner.component';
 import { LoadingInterceptor } from './config/loading.interceptor';
+import { StoreComponent } from './components/store/store.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LoadingInterceptor } from './config/loading.interceptor';
     HeaderComponent,
     FooterComponent,
     GamesComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    StoreComponent
   ],
   imports: [
     BrowserModule,
